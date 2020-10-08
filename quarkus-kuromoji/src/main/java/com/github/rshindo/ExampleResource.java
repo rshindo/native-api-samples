@@ -1,6 +1,5 @@
 package com.github.rshindo;
 
-import com.atilika.kuromoji.ipadic.Token;
 import com.atilika.kuromoji.ipadic.Tokenizer;
 
 import javax.ws.rs.Consumes;
@@ -26,11 +25,12 @@ public class ExampleResource {
 
     @POST
     @Path("/kuromoji")
-    @Consumes(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public List<String> kuromoji(String text) {
-        return tokenizer.tokenize(text).stream()
+    public Output kuromoji(Input input) {
+        List<String> tokens = tokenizer.tokenize(input.getText()).stream()
                 .map(token -> token.getSurface())
                 .collect(Collectors.toList());
+        return new Output(tokens);
     }
 }
