@@ -1,8 +1,9 @@
-## Feature management documentation
+# micronaut-kuromoji
 
-- [Micronaut Micronaut Management documentation](https://docs.micronaut.io/latest/guide/index.html#management)
+## Build native image
 
-## Feature http-client documentation
-
-- [Micronaut Micronaut HTTP Client documentation](https://docs.micronaut.io/latest/guide/index.html#httpClient)
+```
+./gradlew clean assemble
+native-image -H:Class=com.github.rshindo.Application -H:Name=application --no-fallback -cp build/libs/*.jar:build/resources:build/layers/application.jar
+```
 
