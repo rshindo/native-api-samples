@@ -5,7 +5,6 @@ import com.atilika.kuromoji.ipadic.Tokenizer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.RouterFunctions;
@@ -29,7 +28,7 @@ public class SpringBootKuromojiApplication {
     @Bean
     public RouterFunction<ServerResponse> routes() {
         return RouterFunctions.route()
-                .POST("/kuromoji", accept(MediaType.TEXT_PLAIN),
+                .POST("/kuromoji", accept(MediaType.APPLICATION_JSON),
                         this::handleKuromojiRequest)
                 .build();
     }
@@ -40,9 +39,9 @@ public class SpringBootKuromojiApplication {
                 .map(tokens -> new Output(tokens.stream()
                         .map(Token::getSurface)
                         .collect(Collectors.toList())));
+
         return ServerResponse.ok()
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(body, new ParameterizedTypeReference<Output>() {
-                });
+                .body(body, Output.class);
     }
 }

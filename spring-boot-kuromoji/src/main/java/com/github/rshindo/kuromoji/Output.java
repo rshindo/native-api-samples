@@ -7,6 +7,9 @@ public class Output {
 
     private List<String> tokens;
 
+    public Output() {
+    }
+
     public Output(List<String> tokens) {
         this.tokens = tokens;
     }

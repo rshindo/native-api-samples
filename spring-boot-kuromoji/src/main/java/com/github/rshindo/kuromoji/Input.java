@@ -6,6 +6,9 @@ public class Input {
 
     private String text;
 
+    public Input() {
+    }
+
     public String getText() {
         return text;
     }

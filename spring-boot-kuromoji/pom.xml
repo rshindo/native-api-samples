@@ -33,6 +33,11 @@
             <artifactId>spring-boot-starter-webflux</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.springframework.experimental</groupId>
+            <artifactId>spring-graalvm-native</artifactId>
+            <version>0.8.2-SNAPSHOT</version>
+        </dependency>
+        <dependency>
             <groupId>com.atilika.kuromoji</groupId>
             <artifactId>kuromoji-ipadic</artifactId>
             <version>0.9.0</version>
@@ -67,13 +72,6 @@
     <profiles>
         <profile>
             <id>native</id>
-            <dependencies>
-                <dependency>
-                    <groupId>org.springframework.experimental</groupId>
-                    <artifactId>spring-graalvm-native</artifactId>
-                    <version>0.8.2-SNAPSHOT</version>
-                </dependency>
-            </dependencies>
             <build>
                 <plugins>
                     <plugin>
@@ -88,7 +86,6 @@
                                         -Dspring.native.mode=${spring.native.mode}
                                         -Dspring.spel.ignore=true
                                         -Dspring.native.remove-yaml-support=true
-                                        -H:ResourceConfigurationFiles=/workspace/BOOT-INF/classes/resources-config.json
                                     </BP_BOOT_NATIVE_IMAGE_BUILD_ARGUMENTS>
                                 </env>
                             </image>
